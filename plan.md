@@ -1,17 +1,22 @@
 # OMG Happy Birthday - Implementation Plan
 
 ## Project Overview
-A static website generator for emergency birthday surprises when you totally forgot someone's special day. The system automates the creation of an interactive, personalized birthday page that can be quickly deployed to GitHub Pages.
+A static website generator for emergency birthday or small celebration. Surprises when you totally forgot it in a matter of few minutes. The system automates the creation of an interactive, personalized page that can be quickly deployed to GitHub Pages.
 
 ## Technology Stack
-- **Framework**: Astro (static site generator)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with [Tailwind Animations](https://github.com/midudev/tailwind-animations)
-- **Icons**: [Tabler Icons](https://www.npmjs.com/package/@tabler/icons-react)
-- **Audio**: YouTube embed API (fallback to generic celebration audio)
-- **Deployment**: GitHub Pages
-- **CI/CD**: GitHub Actions
+- **Framework**: User selectable via `config.md` (Options: Astro, Next.js, Static HTML)
 
-## Data Structure (`data.md`)
+## Data Structure
+
+### `config.md` (Tech Stack)
+```yaml
+---
+stack: "astro" # options: astro, nextjs, html
+version: "latest"
+---
+```
+
+### `data.md` (Content)
 ```yaml
 ---
 name: "Bryan"
@@ -29,10 +34,14 @@ celebrationSongUrl: "" # optional YouTube URL
 
 ## Implementation Workplan
 
-### Phase 1: Project Setup
-- [ ] Initialize Astro project with minimal template
-- [ ] Configure GitHub Pages deployment in `astro.config.mjs`
-- [ ] Create basic project structure (components, layouts, pages)
+### Phase 1: Project Setup & Scaffolding
+- [ ] Create `config.md` to define technology stack
+- [ ] Create scaffolding script/workflow that reads `config.md`:
+  - If `astro`: Initialize Astro project
+  - If `nextjs`: Initialize Next.js project
+  - If `html`: Setup basic HTML/CSS/JS structure
+- [ ] Configure GitHub Pages deployment based on selected stack
+- [ ] Create basic project structure (components, layouts, pages) adapted to chosen stack
 - [ ] Set up Tabler Icons integration
 - [ ] Set up simple i18n system:
   - Create translation files for supported languages
