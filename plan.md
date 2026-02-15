@@ -4,54 +4,39 @@
 A static website generator for emergency birthday or small celebration. Surprises when you totally forgot it in a matter of few minutes. The system automates the creation of an interactive, personalized page that can be quickly deployed to GitHub Pages.
 
 ## Technology Stack
-- **Framework**: User selectable via `config.md` (Options: Astro, Next.js, Static HTML)
+User selectable via `config.md`, recomended by default.
 
 ## Data Structure
 
-### `config.md` (Tech Stack)
-```yaml
----
-stack: "astro" # options: astro, nextjs, html
-version: "latest"
----
-```
-
-### `data.md` (Content)
-```yaml
----
-name: "Bryan"
-age: 30 # optional
-language: "en" # options: en, es, fr, de, pt, it, ja, zh, etc.
-favoriteAnimal: "cat" # options: cat, dog, or custom
-primaryColor: "#FF6B9D"
-secondaryColor: "#C44569"
-customMessage: "I wish you the best of the best"
-fromName: "Your Friend"
-countryCode: "US" # for national anthem (optional)
-celebrationSongUrl: "" # optional YouTube URL
----
-```
+User customizable via `data.md`, please take some minutes to be as especific as you want.
 
 ## Implementation Workplan
 
-### Phase 1: Project Setup & Scaffolding
-- [ ] Create `config.md` to define technology stack
-- [ ] Create scaffolding script/workflow that reads `config.md`:
-  - If `astro`: Initialize Astro project
+### Phase 1: Confirm planning
+- [ ] Read `data.md` to understand celebration context and the tastes of the person being celebrated.
+- [ ] The following steps should be interpreted every time based on the properties of `data.md`, props are represented as `[propName]` Ask for user confirmation before proceeding the next step. 
+- [ ] All dialog options or message suggestions should be in the [language] the user specified.
+- [ ] Workflow screens:
+  - [ ] "Welcome form", this is a dialog that asks for the name with a caption "The most important/cool/great person that loves [favorites], we have an important message for he-she", then an iput area that splits every char of the [name] appears, for example for "Pancho" should be "P _ _ _ _ O", for Ale85 "A _ _ _ 5" and so on. So suggest the message and confirm the name we are going to use. If the name matches, go to the next screen, if not just buzz the dialog
+  - [ ] "Cake Appearing", Copilot will geneare a cake based on the user's [favorites] and [favoriteColor], this image will fade in in from the very botttom to the middle, the opacity and possition will take 3 seconds to be in place with a bounce-out animation.
+  - [ ] "Celebration message", On the background [youtubeSongUrl] start playing as background music with the simpliest volume controls (play, stop), in the meantime [celebrationTitle] will appear on the top of the cake, big size and bouncing, and finally [customMessage] will appear on the bottom of the cake, multiline if it's needed
+- [ ] Once every step is confirmed let's go to the step 2
+
+### Phase 2: Project Setup & Scaffolding
+- [ ] Read `config.md` to define technology stack
+- [ ] Create scaffolding script/workflow that based on `config.md` specs, before start ensure it's simple o deploy a project with the selected stack:
   - If `nextjs`: Initialize Next.js project
+  - If `astro`: Initialize Astro project
   - If `html`: Setup basic HTML/CSS/JS structure
 - [ ] Configure GitHub Pages deployment based on selected stack
 - [ ] Create basic project structure (components, layouts, pages) adapted to chosen stack
-- [ ] Set up Tabler Icons integration
-- [ ] Set up simple i18n system:
-  - Create translation files for supported languages
-  - Load ONLY the language specified in `data.md`
-  - Fallback to English if language not available
-  - Set HTML `lang` attribute based on selected language
-- [ ] Create `.gitignore` and initial `README.md`
+- [ ] Configure all other integrations for styling like: Components, icons, images and everything that will be needed
+- [ ] Create configuration files like `.gitignore`, Github Actions for deployment, if you need to customize actions on `package.json`
 
-### Phase 2: Name Entry Screen (Mobile-First)
-- [ ] Create clean form layout with mostly white background, almost-black text
+### Phase 3: Loading Screen
+
+- [ ] Based on the `bgColor` prop, decide whether the theme will be dark or ligth, and set a globally a diagonal gradient with a 5%-10% variation
+- [ ] Create clean form layout for the form
 - [ ] Implement letter hint input fields (e.g., "B _ _ _ _ N")
   - Individual rounded input boxes for each letter
   - Show first and last letter as hints
