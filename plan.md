@@ -27,7 +27,8 @@ User customizable via `data.md`, please take some minutes to be as especific as 
 
 ### Phase 2: Project Setup & Scaffolding
 - [ ] Read `config.md` to define technology stack
-- [ ] Create scaffolding script/workflow that based on `config.md` specs, the project should be under the `omg-hbd-app` folder in order to avoid repository indexation, we need only the output, before start ensure it's simple o deploy a project with the selected stack and autoverify if we have everithing that it's needed to deploy it:
+- [ ] Create scaffolding script/workflow that based on `config.md` specs, THE SOURCE CODE of the page should be under the `omg-hbd-app` folder to avoid pushing it to github by default, only the build is needed for deployment into the page.
+- [ ] Before start ensure it's simple o deploy a project with the selected stack and autoverify if we have everithing that it's needed to deploy the build at the end:
   - If `nextjs`: Initialize Next.js project
   - If `astro`: Initialize Astro project
   - If `html`: Setup basic HTML/CSS/JS structure
