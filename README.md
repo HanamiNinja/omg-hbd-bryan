@@ -21,7 +21,9 @@ cd omg-hbd-paco
 # Edit data.md: name: "Paco", language: "es"
 git push to new repo "omg-hbd-paco"
 # → Ask to your local Copilot to run it
-copilot -i "$(cat plan.md)"
+copilot
+# → Ask to copilot
+`follow plan.md steps to create a congratulations website`
 ```
 ## Next Steps
 Once this plan is approved:
