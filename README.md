@@ -1,77 +1,67 @@
-## Workflow Example
+# OMG Happy Birthday 🎉
+[![Generate Site](https://github.com/OWNER/REPO/actions/workflows/generate-site.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/generate-site.yml)
 
-### For John (US, English)
-```bash
-# For John (US, English)
-git clone https://github.com/yourusername/omg-hbd.git omg-hbd-john
-cd omg-hbd-john
-# Edit data.md: name: "John", language: "en"
-code .
-# → Ask to your local Copilot to run it
-copilot -i "$(cat plan.md)"
-# Confirm all necessary steps and wait
-# once it's completes
+A static website generator for emergency birthday or small celebration. Surprises when you totally forgot it in a matter of few minutes. The system automates the creation of an interactive, personalized page that can be quickly deployed to GitHub Pages.
+
+## Quick Start
+
+### The Fork-per-Friend Workflow
+1. **Fork** this repo as `omg-hbd-john` for John (English).
+2. **Clone** it: `git clone ...`
+3. **Edit** `data.md` with John's details.
+4. **Push** changes. The site will automatically build and deploy to GitHub Pages!
+
+### Configuration (`data.md`)
+
+Edit `data.md` in the root directory to personalize the experience.
+
+```yaml
+language: "en" # ui options: en, es, fr, de, etc.
+name: "Bryan"
+favorites: "dogs,videogames" # options: cat, dog, soccer, swimming or custom
+favoriteColor: "blue" # options: #hexvalue or name
+bgColor: "#D6EADF" # options: #hexvalue or name
+fromName: "Your Friend Steve" # who is sending this
+celebrationTitle: "Happy 40th Anniversary!" # Main greeting
+customMessage: "My best wishes..." # A custom message
+youtubeSongUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" # Background Music
 ```
 
+### Supported Languages
+Ensure `messages.md` content matches your chosen language. By default, English (en) is provided.
+- English (en)
+- Spanish (es) - *Update messages.md manually*
+- French (fr) - *Update messages.md manually*
 
-```bash
-# For Paco (Mexico, Spanish)  
-git clone https://github.com/yourusername/omg-hbd.git omg-hbd-paco
-cd omg-hbd-paco
-# Edit data.md: name: "Paco", language: "es"
-git push to new repo "omg-hbd-paco"
-# → Ask to your local Copilot to run it
-copilot
-# → Ask to copilot
-`follow plan.md steps to create a congratulations website`
-```
-## Next Steps
-Once this plan is approved:
-1. Initialize Astro project
-2. Set up basic project structure
-3. Create example `data.md`
-4. Begin Phase 2 implementation
+### Color Palette Suggestions
+* **Energetic**: Bright oranges, yellows (`#FF6B35`, `#F7931E`)
+* **Calm**: Blues, teals (`#4ECDC4`, `#44A5C5`)
+* **Romantic**: Pinks, purples (`#FF6B9D`, `#C44569`)
+* **Professional**: Navy, gold (`#2C3E50`, `#F39C12`)
+* **Elegant**: Black, gold (`#000000`, `#D4AF37`)
 
+## Deployment
 
+This project uses **GitHub Actions** to deploy to **GitHub Pages**.
+1. Go to your repository **Settings** -> **Pages**.
+2. Select **GitHub Actions** as the source.
+3. Push a change to `data.md` to trigger the deployment.
 
-### Phase 8: Documentation & Polish
-- [ ] Write comprehensive README with:
-  - Quick start guide emphasizing the **fork-per-friend workflow**:
-    * "Fork this repo as `omg-hbd-john` for John (English)"
-    * "Fork again as `omg-hbd-paco` for Paco (Spanish)"
-    * Each fork = one person, one language
-  - `data.md` field explanations (including language codes)
-  - Supported languages list:
-    * English (en), Spanish (es), French (fr)
-    * German (de), Portuguese (pt), Italian (it)
-    * Japanese (ja), Chinese (zh)
-    * Add more as needed
-  - Color palette suggestions by personality:
-    * Energetic: Bright oranges, yellows (#FF6B35, #F7931E)
-    * Calm: Blues, teals (#4ECDC4, #44A5C5)
-    * Romantic: Pinks, purples (#FF6B9D, #C44569)
-    * Professional: Navy, gold (#2C3E50, #F39C12)
-    * Playful: Rainbow gradients
-    * Elegant: Black, gold (#000000, #D4AF37)
-  - Deployment instructions
-  - Troubleshooting guide
-- [ ] Add example `data.md` files for different languages
-- [ ] Create demo GIF/video for README
-- [ ] Add MIT license
-- [ ] Test full workflow end-to-end with multiple language forks
+## Local Development
 
-### Phase 9: Optional Enhancements
-- [ ] Add more animal options (birds, fish, etc.) with corresponding icons
-- [ ] Implement confetti animation as alternative to fireworks
-- [ ] Add photo upload feature for personalization
-- [ ] Create multiple theme presets
-- [ ] Add countdown timer feature
-- [ ] Expand language support (Arabic RTL, Korean, Russian, etc.)
-- [ ] Community translations contribution guide
+1. Navigate to the app directory:
+   ```bash
+   cd omg-hbd-app
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000).
 
-## Notes & Concerns
-- **Audio Autoplay**: Modern browsers restrict autoplay. May need user interaction first.
-- **YouTube Embed**: Consider data usage for mobile users. Fallback is important.
-- **Performance**: Heavy animations may impact low-end devices. Add performance mode toggle?
-- **Copyright**: Ensure all audio/music used is properly licensed or royalty-free.
-- **Fork Strategy**: Each fork is a separate deployment for ONE person in ONE language. Simple and clean!
+## License
+MIT
