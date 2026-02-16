@@ -1,50 +1,51 @@
 # OMG Happy Birthday - Implementation Plan
 
 ## Project Overview
-A static website generator for emergency birthday surprises when you totally forgot someone's special day. The system automates the creation of an interactive, personalized birthday page that can be quickly deployed to GitHub Pages.
+A static website generator for emergency birthday or small celebration. Surprises when you totally forgot it in a matter of few minutes. The system automates the creation of an interactive, personalized page that can be quickly deployed to GitHub Pages.
 
 ## Technology Stack
-- **Framework**: Astro (static site generator)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with [Tailwind Animations](https://github.com/midudev/tailwind-animations)
-- **Icons**: [Tabler Icons](https://www.npmjs.com/package/@tabler/icons-react)
-- **Audio**: YouTube embed API (fallback to generic celebration audio)
-- **Deployment**: GitHub Pages
-- **CI/CD**: GitHub Actions
+User selectable via `config.md`, recomended by default.
 
-## Data Structure (`data.md`)
-```yaml
----
-name: "Bryan"
-age: 30 # optional
-language: "en" # options: en, es, fr, de, pt, it, ja, zh, etc.
-favoriteAnimal: "cat" # options: cat, dog, or custom
-primaryColor: "#FF6B9D"
-secondaryColor: "#C44569"
-customMessage: "I wish you the best of the best"
-fromName: "Your Friend"
-countryCode: "US" # for national anthem (optional)
-celebrationSongUrl: "" # optional YouTube URL
----
-```
+## Data Structure
+
+User customizable via `data.md`, please read it carefully, it's important.
 
 ## Implementation Workplan
 
-### Phase 1: Project Setup
-- [ ] Initialize Astro project with minimal template
-- [ ] Configure GitHub Pages deployment in `astro.config.mjs`
-- [ ] Create basic project structure (components, layouts, pages)
-- [ ] Set up Tabler Icons integration
-- [ ] Set up simple i18n system:
-  - Create translation files for supported languages
-  - Load ONLY the language specified in `data.md`
-  - Fallback to English if language not available
-  - Set HTML `lang` attribute based on selected language
-- [ ] Create `.gitignore` and initial `README.md`
+### Phase 1: Planning
+- [ ] Read `data.md` to understand celebration context and the tastes of the person being celebrated.
+- [ ] The following steps should be interpreted every time based on the properties of `data.md`, props are represented as `propName` Ask for user confirmation before proceeding the next phase. 
+- [ ] All dialog options or message suggestions should be in the `language` the user specified.
+- [ ] Workflow screens:
+  - [ ] "Welcome form", this is a dialog that asks for the name with a caption "The most important/cool/great person that loves `favorites`, we have an important message for he-she", then an iput area that splits every char of the `name` appears, for example for "Pancho" should be "P _ _ _ _ O", for Ale85 "A _ _ _ 5" and so on. So suggest the message and confirm the name we are going to use. If the name matches, go to the next screen, if not just buzz the dialog
+  - [ ] "Loading Screen", will show a fake loading, about 8-10 seconds and shows random messages
+  - [ ] "Cake Appearing", Copilot will geneare a cake based on the user's `favorites` and `favoriteColor`, this image will fade in in from the very botttom to the middle, the opacity and possition will take 3 seconds to be in place with a bounce-out animation.
+  - [ ] "Party Mode", On the background `youtubeSongUrl` start playing as background music with the simpliest volume controls (play, stop), in the meantime `celebrationTitle` will appear on the top of the cake, big size and bouncing, and finally `customMessage` will appear on the bottom of the cake, multiline if it's needed
+- [ ] Once every step is confirmed, generate a `messages.md` generate an option of all messages and ask for approval from user, take in cosideration all the messages needed in all phases described in this document ("Welcome Form", "Loading Screen" and "Final Congratulations Screen")
+- [ ] Ensure all messages are culturally appropriate for the celebrated language
+- [ ] Then look if you have skills to generate the cake image (DALL-E 3, Nanobanana or another skill), if you could look for a suggestion based on the celebrated preferences will be great, if not, ask to the user to set an option for the cake image.
+- [ ] Ensure the build `npm run build` (or equivalent) makes available all files on the `/docs` folder of this project
 
-### Phase 2: Name Entry Screen (Mobile-First)
-- [ ] Create clean form layout with mostly white background, almost-black text
-- [ ] Implement letter hint input fields (e.g., "B _ _ _ _ N")
-  - Individual rounded input boxes for each letter
+### Phase 2: Project Setup & Scaffolding
+- [ ] Read `config.md` to define technology stack
+- [ ] Create scaffolding script/workflow that based on `config.md` specs, THE SOURCE CODE of the page should be under the `omg-hbd-app` folder to avoid pushing it to github by default, only the build is needed for deployment into the page.
+- [ ] Before start ensure it's simple o deploy a project with the selected stack and autoverify if we have everithing that it's needed to deploy the build at the end:
+  - If `nextjs`: Initialize Next.js project
+  - If `astro`: Initialize Astro project
+  - If `html`: Setup basic HTML/CSS/JS structure
+- [ ] Configure GitHub Pages deployment based on selected stack
+- [ ] Create basic project structure (components, layouts, pages) adapted to chosen stack
+- [ ] Configure all other integrations for styling like: Components, icons, images and everything that will be needed
+- [ ] Create configuration files like `.gitignore`, Github Actions for deployment, if you need to customize actions on `package.json` in case it's needed
+- [ ] Projec build should place all files on `/docs` of this folder to generate the corresponding github page, please change the configuration of `npm run build` o equivalent
+
+### Phase 3: Welcome Form
+- [ ] Read `data.md` and `messages.md` to get context and the required messages
+- [ ] General Layout and styling definition
+  - [ ] Based on the `bgColor` prop, decide whether the theme will be dark or ligth
+  - [ ] Set a main a diagonal gradient with a 5%-10% variation based on the `bgColor`
+- [ ] The initial from it's a Dialog with etter hint input fields (e.g., "B _ _ _ _ N")
+  - Individual input boxes for each letter
   - Show first and last letter as hints
   - Auto-focus on first empty field
   - Auto-advance to next field on input
@@ -52,117 +53,41 @@ celebrationSongUrl: "" # optional YouTube URL
   - Compare entered name with `data.md` configuration
   - Show localized "Not cool enough" alert on mismatch
   - Trigger loading screen on correct name
-- [ ] Add localized text:
+- [ ] Add localized text based on the `messages.md` for the intro:
   - "We are looking for a super special one, please enter your name"
   - Error messages
 - [ ] Mobile-first responsive design
 
-### Phase 3: Loading Screen
-- [ ] Create loading animation component
-- [ ] Generate flattering loading messages (with translations):
+### Phase 4: Loading Screen
+- [ ] Read `data.md` and `messages.md` to get context and the required messages
+- [ ] Create loading animation component, will last for 8-10 seconds
+- [ ] Randomly rotates loading messages (with translations):
   - "Compressing big amount of coolness"
   - "Getting things ready for such amazing person"
-  - "Taking out the fancy cutlery"
-  - "Polishing the red carpet"
-  - "Alerting the paparazzi"
-  - "Preparing confetti cannons"
-- [ ] Ensure messages are culturally appropriate per language
+  - ...
 - [ ] Add progress indicator or animated element
 - [ ] Smooth transition to next screen
 
-### Phase 4: Famous Namesakes Dialog
-- [ ] Create dialog/modal component
-- [ ] Implement AI-generated famous namesakes feature:
-  - Use GitHub Actions with AI API to pre-generate list
-  - Request AI to generate content in specified language
-  - Store in generated JSON file
-  - Display relevant famous people with same name
-  - Fallback: "We are looking for [Username], is that you?"
-- [ ] Add localized CTA button:
-  - "No, I'm better than them" (English)
-  - "No, soy mejor que ellos" (Spanish)
-  - etc.
-- [ ] Smooth background gradient transition (from data.md colors)
+### Phase 5: Cake Appearing
+- Place the cake on the bottom totally transparent
+- The animation to the middle will last 3-5 seconds with a small bounce at the end
+- The same for the opacity to 100%
+- [ ] Integrate audio playback:
+  - YouTube embed API (hidden, audio-only) for `youtubeSongUrl`
+  - Auto-play with user gesture handling
 
-### Phase 5: Party Mode Activation
-- [ ] Implement background gradient intensification (~10% shift)
+### Phase 6: Party Mode Activation
 - [ ] Create fireworks animation system:
   - Use Tabler Icons for cats/dogs based on `favoriteAnimal`
   - Particle system with icon-based sparks
   - Random burst patterns
   - Continuous animation
-- [ ] Integrate audio playback:
-  - YouTube embed API (hidden, audio-only) for national anthem
-  - Fallback to generic celebration audio file
-  - Auto-play with user gesture handling
-- [ ] Cake animation:
-  - SVG or CSS-based cake illustration
-  - Slide up from bottom to center
-  - 10-15 second animation duration
-
-### Phase 6: Final Congratulations Screen
-- [ ] Create birthday message layout:
-  - Top: Localized "Happy Birthday" or "Happy [XX] Birthday"
-    - "Happy Birthday" (en)
-    - "Feliz Cumpleaños" (es)
-    - "Joyeux Anniversaire" (fr)
-    - "Alles Gute zum Geburtstag" (de)
-    - "Feliz Aniversário" (pt)
-    - "Buon Compleanno" (it)
-    - "お誕生日おめでとう" (ja)
-    - "生日快乐" (zh)
-  - Center: Animated cake with custom message on base
-  - Bottom: Localized "From [fromName]"
-- [ ] Apply final background gradient from data.md
+- [ ] The messages appear in the following layout:
+  - Top: Localized `celebrationTitle`
+  - Bottom: `customMessage`
+  - Bottom: `fromName`
 - [ ] Add subtle continuous animations (floating elements, sparkles)
 - [ ] Ensure all animations are complete before showing
-
-### Phase 7: GitHub Actions Automation
-- [ ] Create workflow file (`.github/workflows/generate-site.yml`)
-- [ ] Set up trigger on `data.md` changes
-- [ ] Implement AI integration for:
-  - Famous namesakes generation (in specified language)
-  - Loading message variations (culturally appropriate)
-  - Personalized content based on name/age/language
-  - Respect language parameter for all AI-generated content
-- [ ] Configure Astro build step
-- [ ] Set up GitHub Pages deployment
-- [ ] Add workflow status badge to README
-
-### Phase 8: Documentation & Polish
-- [ ] Write comprehensive README with:
-  - Quick start guide emphasizing the **fork-per-friend workflow**:
-    * "Fork this repo as `omg-hbd-john` for John (English)"
-    * "Fork again as `omg-hbd-paco` for Paco (Spanish)"
-    * Each fork = one person, one language
-  - `data.md` field explanations (including language codes)
-  - Supported languages list:
-    * English (en), Spanish (es), French (fr)
-    * German (de), Portuguese (pt), Italian (it)
-    * Japanese (ja), Chinese (zh)
-    * Add more as needed
-  - Color palette suggestions by personality:
-    * Energetic: Bright oranges, yellows (#FF6B35, #F7931E)
-    * Calm: Blues, teals (#4ECDC4, #44A5C5)
-    * Romantic: Pinks, purples (#FF6B9D, #C44569)
-    * Professional: Navy, gold (#2C3E50, #F39C12)
-    * Playful: Rainbow gradients
-    * Elegant: Black, gold (#000000, #D4AF37)
-  - Deployment instructions
-  - Troubleshooting guide
-- [ ] Add example `data.md` files for different languages
-- [ ] Create demo GIF/video for README
-- [ ] Add MIT license
-- [ ] Test full workflow end-to-end with multiple language forks
-
-### Phase 9: Optional Enhancements
-- [ ] Add more animal options (birds, fish, etc.) with corresponding icons
-- [ ] Implement confetti animation as alternative to fireworks
-- [ ] Add photo upload feature for personalization
-- [ ] Create multiple theme presets
-- [ ] Add countdown timer feature
-- [ ] Expand language support (Arabic RTL, Korean, Russian, etc.)
-- [ ] Community translations contribution guide
 
 ## Technical Considerations
 
@@ -175,7 +100,7 @@ celebrationSongUrl: "" # optional YouTube URL
 ### Performance
 - Lazy-load animations
 - Preload critical assets
-- Optimize SVG icons
+- Optimize SVG icons if needed
 - Minimize JavaScript bundle
 - Use CSS animations over JavaScript where possible
 
@@ -193,89 +118,8 @@ celebrationSongUrl: "" # optional YouTube URL
 - Graceful degradation for older browsers
 - Fallbacks for animation features
 
-## File Structure
-```
-omg-hbd/
-├── .github/
-│   └── workflows/
-│       └── generate-site.yml
-├── src/
-│   ├── components/
-│   │   ├── NameEntry.astro
-│   │   ├── LoadingScreen.astro
-│   │   ├── FamousDialog.astro
-│   │   ├── PartyMode.astro
-│   │   ├── CongratulationsScreen.astro
-│   │   └── Fireworks.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   ├── pages/
-│   │   └── index.astro
-│   ├── i18n/
-│   │   ├── translations.js
-│   │   ├── en.json
-│   │   ├── es.json
-│   │   ├── fr.json
-│   │   ├── de.json
-│   │   ├── pt.json
-│   │   ├── it.json
-│   │   ├── ja.json
-│   │   └── zh.json
-│   └── styles/
-│       └── global.css
-├── public/
-│   ├── audio/
-│   │   └── celebration.mp3
-│   └── icons/
-├── data.md
-├── astro.config.mjs
-├── package.json
-├── README.md
-└── .gitignore
-```
-
 ## Success Criteria
-- [ ] Complete site generation in under 2 minutes from `data.md` update
+- [ ] Complete site generation in under 5 minutes from `data.md` update
 - [ ] Mobile-responsive on all screen sizes
 - [ ] Smooth 60fps animations on modern devices
 - [ ] Zero-configuration deployment to GitHub Pages
-- [ ] Foolproof README that anyone can follow
-
-## Notes & Concerns
-- **Audio Autoplay**: Modern browsers restrict autoplay. May need user interaction first.
-- **YouTube Embed**: Consider data usage for mobile users. Fallback is important.
-- **AI API Costs**: GitHub Actions may need API key for AI features (OpenAI, Anthropic, etc.)
-- **Performance**: Heavy animations may impact low-end devices. Add performance mode toggle?
-- **Copyright**: Ensure all audio/music used is properly licensed or royalty-free.
-- **Fork Strategy**: Each fork is a separate deployment for ONE person in ONE language. Simple and clean!
-
-## Workflow Example
-```bash
-# For John (US, English)
-git clone https://github.com/yourusername/omg-hbd.git omg-hbd-john
-cd omg-hbd-john
-# Edit data.md: name: "John", language: "en"
-git push to new repo "omg-hbd-john"
-# → Deploys to john.github.io/omg-hbd-john
-
-# For Paco (Mexico, Spanish)  
-git clone https://github.com/yourusername/omg-hbd.git omg-hbd-paco
-cd omg-hbd-paco
-# Edit data.md: name: "Paco", language: "es"
-git push to new repo "omg-hbd-paco"
-# → Deploys to paco.github.io/omg-hbd-paco
-
-# For Kenji (Japan, Japanese)
-git clone https://github.com/yourusername/omg-hbd.git omg-hbd-kenji
-cd omg-hbd-kenji
-# Edit data.md: name: "Kenji", language: "ja"
-git push to new repo "omg-hbd-kenji"
-# → Deploys to kenji.github.io/omg-hbd-kenji
-```
-
-## Next Steps
-Once this plan is approved:
-1. Initialize Astro project
-2. Set up basic project structure
-3. Create example `data.md`
-4. Begin Phase 2 implementation
