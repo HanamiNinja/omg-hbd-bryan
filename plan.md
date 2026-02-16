@@ -36,6 +36,7 @@ User customizable via `data.md`, please take some minutes to be as especific as 
 - [ ] Create basic project structure (components, layouts, pages) adapted to chosen stack
 - [ ] Configure all other integrations for styling like: Components, icons, images and everything that will be needed
 - [ ] Create configuration files like `.gitignore`, Github Actions for deployment, if you need to customize actions on `package.json` in case it's needed
+- [ ] Projec build should place all files on `/docs` of this folder to generate the corresponding github page, please change the configuration of `npm run build` o equivalent
 
 ### Phase 3: Welcome Form
 - [ ] Read `data.md` and `messages.md` to get context and the required messages
