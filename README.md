@@ -1,15 +1,17 @@
 # OMG Happy Birthday 🎉
-[![Generate Site](https://github.com/OWNER/REPO/actions/workflows/generate-site.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/generate-site.yml)
 
-A static website generator for emergency birthday or small celebration. Surprises when you totally forgot it in a matter of few minutes. The system automates the creation of an interactive, personalized page that can be quickly deployed to GitHub Pages.
+A static website generator to create emergency celebration messages. Surprises when you totally forgot it, in a matter of few minutes you will have a nice page. The system automates the creation of an interactive, personalized page that can be quickly deployed to GitHub Pages.
 
 ## Quick Start
 
 ### The Fork-per-Friend Workflow
 1. **Fork** this repo as `omg-hbd-john` for John (English).
 2. **Clone** it: `git clone ...`
-3. **Edit** `data.md` with John's details.
-4. **Push** changes. The site will automatically build and deploy to GitHub Pages!
+3. **Copy and edit**: `cp data.example.md data.md`
+4. **Edit** `data.md` with John's details.
+5. **Process it with Copilot** `copilot` then `follow plan.md steps to create a congratulations website`
+6. **Confirm and Wait** Check Copilot suggestions and changes to build your landing page
+7. **Push** changes. The site will automatically be visible on to GitHub Pages!
 
 ### Configuration (`data.md`)
 
@@ -17,7 +19,7 @@ Edit `data.md` in the root directory to personalize the experience.
 
 ```yaml
 language: "en" # ui options: en, es, fr, de, etc.
-name: "Bryan"
+name: "Bryan" # The name of your special one
 favorites: "dogs,videogames" # options: cat, dog, soccer, swimming or custom
 favoriteColor: "blue" # options: #hexvalue or name
 bgColor: "#D6EADF" # options: #hexvalue or name
@@ -42,10 +44,7 @@ Ensure `messages.md` content matches your chosen language. By default, English (
 
 ## Deployment
 
-This project uses **GitHub Actions** to deploy to **GitHub Pages**.
-1. Go to your repository **Settings** -> **Pages**.
-2. Select **GitHub Actions** as the source.
-3. Push a change to `data.md` to trigger the deployment.
+This project build the static site into `docs` folder, so a public webpage will be available once you push it.
 
 ## Local Development
 

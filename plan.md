@@ -8,7 +8,7 @@ User selectable via `config.md`, recomended by default.
 
 ## Data Structure
 
-User customizable via `data.md`, please take some minutes to be as especific as you want.
+User customizable via `data.md`, please read it carefully, it's important.
 
 ## Implementation Workplan
 
@@ -23,7 +23,8 @@ User customizable via `data.md`, please take some minutes to be as especific as 
   - [ ] "Party Mode", On the background `youtubeSongUrl` start playing as background music with the simpliest volume controls (play, stop), in the meantime `celebrationTitle` will appear on the top of the cake, big size and bouncing, and finally `customMessage` will appear on the bottom of the cake, multiline if it's needed
 - [ ] Once every step is confirmed, generate a `messages.md` generate an option of all messages and ask for approval from user, take in cosideration all the messages needed in all phases described in this document ("Welcome Form", "Loading Screen" and "Final Congratulations Screen")
 - [ ] Ensure all messages are culturally appropriate for the celebrated language
-- [ ] Then look if you have skills to generate the cake image (DALL-E 3, Nanobanana or another skill), if not, ask to the user to set an option for the cake image.
+- [ ] Then look if you have skills to generate the cake image (DALL-E 3, Nanobanana or another skill), if you could look for a suggestion based on the celebrated preferences will be great, if not, ask to the user to set an option for the cake image.
+- [ ] Ensure the build `npm run build` (or equivalent) makes available all files on the `/docs` folder of this project
 
 ### Phase 2: Project Setup & Scaffolding
 - [ ] Read `config.md` to define technology stack
@@ -75,7 +76,6 @@ User customizable via `data.md`, please take some minutes to be as especific as 
   - YouTube embed API (hidden, audio-only) for `youtubeSongUrl`
   - Auto-play with user gesture handling
 
-
 ### Phase 6: Party Mode Activation
 - [ ] Create fireworks animation system:
   - Use Tabler Icons for cats/dogs based on `favoriteAnimal`
@@ -88,17 +88,6 @@ User customizable via `data.md`, please take some minutes to be as especific as 
   - Bottom: `fromName`
 - [ ] Add subtle continuous animations (floating elements, sparkles)
 - [ ] Ensure all animations are complete before showing
-
-## GitHub Actions Automation
-- [ ] Create workflow file (`.github/workflows/generate-site.yml`)
-- [ ] Set up trigger on `data.md` changes
-- [ ] Implement AI integration for:
-  - Loading message variations (culturally appropriate)
-  - Personalized content based on name/age/language
-  - Respect language parameter for all AI-generated content
-- [ ] Configure Framework build step
-- [ ] Set up GitHub Pages deployment
-- [ ] Add workflow status badge to README
 
 ## Technical Considerations
 
