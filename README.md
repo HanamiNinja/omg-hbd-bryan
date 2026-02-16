@@ -9,13 +9,12 @@ A static website generator to create emergency celebration messages. Surprises w
 2. **Clone** it: `git clone ...`
 3. **Copy and edit**: `cp data.example.md data.md`
 4. **Edit** `data.md` with John's details.
-5. **Process it with Copilot** `copilot` then `follow plan.md steps to create a congratulations website`
-6. **Confirm and Wait** Check Copilot suggestions and changes to build your landing page
-7. **Push** changes. The site will automatically be visible on to GitHub Pages!
+5. **Build**: Run `cd omg-hbd-app && pnpm install && pnpm build` to regenerate the site with new data.
+6. **Push** changes. The site will automatically be visible on GitHub Pages!
 
 ### Configuration (`data.md`)
 
-Edit `data.md` in the root directory to personalize the experience.
+Edit `data.md` in the root directory to personalize the experience. The build process automatically reads this file.
 
 ```yaml
 language: "en" # ui options: en, es, fr, de, etc.
@@ -30,10 +29,7 @@ youtubeSongUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" # Background Music
 ```
 
 ### Supported Languages
-Ensure `messages.md` content matches your chosen language. By default, English (en) is provided.
-- English (en)
-- Spanish (es) - *Update messages.md manually*
-- French (fr) - *Update messages.md manually*
+By default, English (en) is generated. To support other languages or customize messages further, you can edit `omg-hbd-app/src/constants.ts` directly after building, or modify the generation script at `omg-hbd-app/scripts/sync-config.js`.
 
 ### Color Palette Suggestions
 * **Energetic**: Bright oranges, yellows (`#FF6B35`, `#F7931E`)
@@ -54,13 +50,19 @@ This project build the static site into `docs` folder, so a public webpage will 
    ```
 2. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 3. Run the development server:
    ```bash
-   npm run dev
+   pnpm dev
    ```
 4. Open [http://localhost:3000](http://localhost:3000).
+
+To build for deployment:
+```bash
+pnpm build
+# Output is in ../docs
+```
 
 ## License
 MIT
